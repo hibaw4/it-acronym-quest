@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "abbreviation": "API",
+    "fullTerm": "Application Programming Interface",
+    "category": "Software Development",
+    "description": "A set of rules that allows different software applications to communicate with each other"
+  },
+  {
+    "id": "2",
+    "abbreviation": "DNS",
+    "fullTerm": "Domain Name System",
+    "category": "Networking",
+    "description": "Translates domain names to IP addresses"
+  },
+  {
+    "id": "3",
+    "abbreviation": "SQL",
+    "fullTerm": "Structured Query Language",
+    "category": "Database",
+    "description": "Standard language for managing relational databases"
+  },
+  {
+    "id": "4",
+    "abbreviation": "HTTP",
+    "fullTerm": "HyperText Transfer Protocol",
+    "category": "Networking",
+    "description": "Protocol for transmitting hypermedia documents"
+  },
+  {
+    "id": "5",
+    "abbreviation": "CSS",
+    "fullTerm": "Cascading Style Sheets",
+    "category": "Web Development",
+    "description": "Language used to describe the presentation of web pages"
+  },
+  {
+    "id": "6",
+    "abbreviation": "REST",
+    "fullTerm": "Representational State Transfer",
+    "category": "Software Development",
+    "description": "Architectural style for designing networked applications"
+  },
+  {
+    "id": "7",
+    "abbreviation": "JSON",
+    "fullTerm": "JavaScript Object Notation",
+    "category": "Web Development",
+    "description": "Lightweight data interchange format"
+  },
+  {
+    "id": "8",
+    "abbreviation": "OOP",
+    "fullTerm": "Object-Oriented Programming",
+    "category": "Software Development",
+    "description": "Programming paradigm based on the concept of objects"
+  },
+  {
+    "id": "9",
+    "abbreviation": "AWS",
+    "fullTerm": "Amazon Web Services",
+    "category": "Cloud Computing",
+    "description": "Cloud computing platform by Amazon"
+  },
+  {
+    "id": "10",
+    "abbreviation": "CI/CD",
+    "fullTerm": "Continuous Integration/Continuous Deployment",
+    "category": "DevOps",
+    "description": "Practices of automating integration and deployment"
+  }
+]

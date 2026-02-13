@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css'],
+  standalone: false
 })
 export class HeaderComponent {
-
+  @Input() title: string = 'IT Acronym Quest';
+  @Input() showAdminLink: boolean = true;
 }

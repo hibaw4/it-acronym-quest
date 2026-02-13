@@ -8,3 +8,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/* Fix for Material Design form fields to remove vertical line in outline mode */
+::ng-deep .mat-mdc-text-field--outlined .mdc-notched-outline__notch {
+  border-left: none !important;
+  border-right: none !important;
+}

@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// Angular Material
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemFormComponent } from './item-form/item-form.component';
-
 
 @NgModule({
   declarations: [
@@ -14,8 +21,13 @@ import { ItemFormComponent } from './item-form/item-form.component';
     ItemFormComponent
   ],
   imports: [
-    CommonModule,
-    AdminRoutingModule
+    SharedModule,
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSnackBarModule
   ]
 })
 export class AdminModule { }

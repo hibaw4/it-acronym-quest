@@ -1,1 +1,13 @@
-<p>header works!</p>
+<mat-toolbar color="primary" class="shadow-md">
+  <span class="flex-1 text-2xl font-bold">{{ title }}</span>
+  <nav class="flex gap-4">
+    <a mat-button routerLink="/game" routerLinkActive="active">
+      <mat-icon>gamepad</mat-icon>
+      Game
+    </a>
+    <a mat-button routerLink="/admin" routerLinkActive="active" *ngIf="showAdminLink">
+      <mat-icon>settings</mat-icon>
+      Admin
+    </a>
+  </nav>
+</mat-toolbar>

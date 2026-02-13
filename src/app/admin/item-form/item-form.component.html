@@ -1,1 +1,56 @@
-<p>item-form works!</p>
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Acronym' : 'Add New Acronym' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="flex flex-col gap-4">
+    <!-- Abbreviation -->
+    <mat-form-field appearance="fill">
+      <mat-label>Abbreviation</mat-label>
+      <input matInput formControlName="abbreviation" placeholder="e.g., API">
+      <mat-error *ngIf="form.get('abbreviation')?.hasError('required')">
+        Abbreviation is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Full Term -->
+    <mat-form-field appearance="fill">
+      <mat-label>Full Term</mat-label>
+      <input matInput formControlName="fullTerm" placeholder="e.g., Application Programming Interface">
+      <mat-error *ngIf="form.get('fullTerm')?.hasError('required')">
+        Full term is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Category -->
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('category')?.hasError('required')">
+        Category is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="3"
+                placeholder="Brief description of the technology"></textarea>
+    </mat-form-field>
+
+    <!-- Logo URL -->
+    <mat-form-field appearance="fill">
+      <mat-label>Logo URL</mat-label>
+      <input matInput formControlName="logoUrl" placeholder="assets/logos/api.png">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">
+    {{ isEditMode ? 'Update' : 'Add' }}
+  </button>
+</mat-dialog-actions>

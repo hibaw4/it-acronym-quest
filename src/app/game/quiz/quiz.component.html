@@ -1,1 +1,147 @@
-<p>quiz works!</p>
+<div class="max-w-2xl mx-auto mt-8">
+  <!-- Progress Bar -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-2">
+      <div>
+        <span class="text-sm font-medium text-gray-600">Question </span>
+        <span class="text-lg font-bold text-primary">
+          {{ (quizState?.currentQuestion ?? 0) + 1 }}
+        </span>
+        <span class="text-sm font-medium text-gray-600"> / {{ quizState?.totalQuestions ?? 0 }}</span>
+      </div>
+    </div>
+    <mat-progress-bar mode="determinate" 
+                      [value]="progress" 
+                      class="h-2"></mat-progress-bar>
+  </div>
+
+
+  <!-- Quiz Card -->
+  <app-card [elevation]="4">
+    <div class="text-center py-8" 
+         *ngIf="currentAcronym"
+         [@questionAnimation]="quizState?.currentQuestion">
+      <!-- Logo or Abbreviation Display -->
+      <div class="mb-6">
+        <img *ngIf="currentAcronym.logoUrl" 
+             [src]="currentAcronym.logoUrl" 
+             [alt]="currentAcronym.abbreviation"
+             class="mx-auto max-w-xs h-48 object-contain"
+             (error)="currentAcronym.logoUrl = undefined">
+        
+        <h1 *ngIf="!currentAcronym.logoUrl" 
+            class="text-6xl font-bold text-primary mb-4">
+          {{ currentAcronym.abbreviation }}
+        </h1>
+      </div>
+
+      <div class="mb-6">
+        <span class="inline-block bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+          {{ currentAcronym.category }}
+        </span>
+      </div>
+
+      <!-- Hint Display -->
+      <div *ngIf="showHint" 
+           class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg mb-6 text-left"
+           [@hintAnimation]>
+        <div class="flex items-start">
+          <mat-icon class="text-blue-500 mr-2">lightbulb</mat-icon>
+          <div>
+            <p class="font-semibold text-blue-800">Hint</p>
+            <p class="text-sm text-blue-700">{{ hint }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Answer Input -->
+      <div class="mt-6">
+        <div class="mb-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>What does {{ currentAcronym.abbreviation }} stand for?</mat-label>
+            <input matInput 
+                   [formControl]="answerControl" 
+                   placeholder="Type the full term here..."
+                   autocomplete="off"
+                   (keyup.enter)="submitAnswer($event)"
+                   class="text-lg">
+          </mat-form-field>
+        </div>
+
+        <!-- Feedback Message -->
+        <div *ngIf="feedback.show" 
+             class="p-4 rounded-lg mb-6"
+             [@feedbackAnimation]
+             [ngClass]="{
+               'bg-green-100 border-l-4 border-green-500': feedback.correct,
+               'bg-red-100 border-l-4 border-red-500': !feedback.correct
+             }">
+          <div class="flex items-start">
+            <mat-icon [ngClass]="{
+              'text-green-600': feedback.correct,
+              'text-red-600': !feedback.correct
+            }">
+              {{ feedback.correct ? 'check_circle' : 'cancel' }}
+            </mat-icon>
+            <p class="ml-2 font-semibold"
+               [ngClass]="{
+                 'text-green-800': feedback.correct,
+                 'text-red-800': !feedback.correct
+               }">
+              {{ feedback.message }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-3 justify-center">
+          <button mat-raised-button 
+                  color="primary" 
+                  type="button"
+                  (click)="submitAnswer($event)"
+                  [disabled]="answerControl.invalid || feedback.show || isProcessing"
+                  class="min-w-[140px]">
+            <mat-icon>send</mat-icon>
+            Submit
+          </button>
+          
+          <button mat-stroked-button 
+                  type="button"
+                  (click)="getHint('firstLetter')"
+                  [disabled]="feedback.show || showHint">
+            <mat-icon>lightbulb</mat-icon>
+            First 2 Letters
+          </button>
+          
+          <button mat-stroked-button 
+                  type="button"
+                  (click)="getHint('description')"
+                  [disabled]="feedback.show || showHint">
+            <mat-icon>help</mat-icon>
+            Description
+          </button>
+        </div>
+      </div>
+
+      <!-- Next Button (outside form) -->
+      <div *ngIf="feedback.show" 
+           class="flex justify-center mt-4"
+           [@nextButtonAnimation]>
+        <button mat-raised-button 
+                color="accent" 
+                type="button"
+                (click)="nextQuestion()"
+                class="min-w-[140px]">
+          <mat-icon>arrow_forward</mat-icon>
+          Next Question
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <div *ngIf="!currentAcronym" class="text-center py-12">
+      <mat-icon class="text-6xl text-gray-400 mb-4">hourglass_empty</mat-icon>
+      <p class="text-gray-600">Loading quiz...</p>
+    </div>
+  </app-card>
+</div>
