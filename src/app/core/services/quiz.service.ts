@@ -72,7 +72,7 @@ export class QuizService {
 
   nextQuestion(): void {
     const state = this.quizStateSubject.value;
-    // Toujours incrémenter, même sur la dernière question
+    // Always increment currentQuestion to move to the next one, even if it goes beyond totalQuestions
     this.quizStateSubject.next({
       ...state,
       currentQuestion: state.currentQuestion + 1

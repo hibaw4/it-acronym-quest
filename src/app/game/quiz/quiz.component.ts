@@ -124,9 +124,9 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   loadCurrentQuestion(): void {
     const state = this.quizService.getQuizState();
-    this.quizState = state; // Update local reference
+    this.quizState = state;
     
-    // Check if quiz is complete before trying to load
+    // Check if quiz is complete before trying to load a question
     if (state.currentQuestion >= state.totalQuestions) {
       this.router.navigate(['/game/result']);
       return;
@@ -148,7 +148,6 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.showHint = false;
     this.isProcessing = false;
     
-    // Force change detection
     this.cdr.detectChanges();
   }
 
