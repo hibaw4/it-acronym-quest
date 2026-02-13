@@ -60,7 +60,8 @@
     "abbreviation": "AWS",
     "fullTerm": "Amazon Web Services",
     "category": "Cloud Computing",
-    "description": "Cloud computing platform by Amazon"
+    "description": "Cloud computing platform by Amazon",
+    "logoUrl": "assets/logos/aws_logo.png"
   },
   {
     "id": "10",
