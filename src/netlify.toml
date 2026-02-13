@@ -1,0 +1,8 @@
+[build]
+  publish = "dist/it-acronym-quest/browser"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
