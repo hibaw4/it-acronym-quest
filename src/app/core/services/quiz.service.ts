@@ -42,8 +42,22 @@ export class QuizService {
     const currentAcronym = this.getCurrentAcronym();
     if (!currentAcronym) return false;
 
-    const isCorrect = answer.toLowerCase().trim() === 
-                      currentAcronym.fullTerm.toLowerCase().trim();
+    // Normalize strings for more forgiving matching
+    const normalize = (s: string) =>
+      s
+        .normalize('NFD') // split accents from letters
+        .replace(/[\u0300-\u036f]/g, '') // remove diacritic marks
+        .toLowerCase() // transform to lowercase
+        .replace(/[^a-z0-9\s]/g, ' ') // remove punctuation/symbols
+        .replace(/\s+/g, ' ') // collapse whitespace
+        .trim();
+
+    const user = normalize(answer || '');
+    const correct = normalize(currentAcronym.fullTerm || '');
+
+    // Consider correct if normalized strings match either with spaces or when spaces are removed
+    const isCorrect =
+      user === correct || user.replace(/\s+/g, '') === correct.replace(/\s+/g, '');
     
     const state = this.quizStateSubject.value;
     this.quizStateSubject.next({
